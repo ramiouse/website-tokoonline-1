@@ -1,0 +1,69 @@
+.products-image-1 {
+  background-image: url("../../images/products-apple-watch.jpg");
+}
+.products-image-2 {
+  background-image: url("../../images/products-orange-bogotta.jpg");
+}
+.products-image-3 {
+  background-image: url("../../images/products-sofa-ternyaman.jpg");
+}
+.products-image-4 {
+  background-image: url("../../images/products-bubuk-maketti.jpg");
+}
+.products-image-5 {
+  background-image: url("../../images/products-tatakan-gelas.jpg");
+}
+.products-image-6 {
+  background-image: url("../../images/products-mavic-kawe.jpg");
+}
+.products-image-7 {
+  background-image: url("../../images/products-black-edition-nike.jpg");
+}
+.products-image-8 {
+  background-image: url("../../images/products-monkey-toys.jpg");
+}
+
+.component-products {
+  margin-bottom: 20px;
+  &:hover {
+    text-decoration: none;
+  }
+
+  .products-thumbnail {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+
+    &:hover {
+    }
+    &:focus {
+      div[class*="products-image"] {
+        transform: scale(1.1);
+      }
+    }
+
+    div[class*="products-image"] {
+      width: 100%;
+      height: 100%;
+      background-color: #ddd;
+      background-position: center;
+      background-size: cover; //penuhin
+      background-repeat: no-repeat;
+      transition: all 0.3s ease;
+    }
+  }
+  .products-text {
+    font-weight: normal;
+    font-size: 18px;
+    color: #0c0d36;
+    margin-top: 12px;
+  }
+  .products-price {
+    font-weight: 500;
+    font-size: 16px;
+    color: #ff7158;
+  }
+}

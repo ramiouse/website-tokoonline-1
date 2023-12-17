@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Product
+    Transaction
 @endsection
 
 @section('content')
@@ -9,9 +9,9 @@
     <section class="section-content section-dashboard-home" data-aos="fade-up">
         <div class="container-fluid">
             <div class="dashboard-heading">
-                <h2 class="dashboard-title">Product</h2>
+                <h2 class="dashboard-title">Transaction</h2>
                 <p class="dashboard-subtitle">
-                    List of Products
+                    List of Transactions
                 </p>
             </div>
             <div class="dashboard-content">
@@ -19,18 +19,15 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <a href="{{ route('product.create') }}" class="btn btn-primary mb-3">
-                                    + Tambah Product Baru
-                                </a>
                                 <div class="table-responsive">
                                     <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Nama</th>
-                                                <th>Pemilik</th>
-                                                <th>Kategori</th>
                                                 <th>Harga</th>
+                                                <th>Status</th>
+                                                <th>Dibuat</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
@@ -63,20 +60,20 @@
                     name: 'id'
                 },
                 {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
                     data: 'user.name',
                     name: 'user.name'
                 },
                 {
-                    data: 'category.name',
-                    name: 'category.name'
+                    data: 'total_price',
+                    name: 'total_price'
                 },
                 {
-                    data: 'price',
-                    name: 'price'
+                    data: 'transaction_status',
+                    name: 'transaction_status'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at'
                 },
                 {
                     data: 'action',

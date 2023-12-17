@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Product;
-use App\Models\User;
-use App\Models\Category;
-use App\Http\Requests\Admin\ProductRequest;
-use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
 
-class ProductController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,9 +17,7 @@ class ProductController extends Controller
     public function index()
     {
         if(request()->ajax()) {
-
-            $query = Product::with(['user','category']);
-
+            $query = Transaction::with(['user']);
             return DataTables::of($query)
               ->addColumn('action', function($item) {
                   return 
@@ -37,10 +30,10 @@ class ProductController extends Controller
                           Aksi
                       </button>
                         <div class="dropdown-menu">
-                          <a href="' . route('product.edit', $item->id) . '" class="dropdown-item">
+                          <a href="' . route('transaction.edit', $item->id) . '" class="dropdown-item">
                             Sunting
                           </a>
-                          <form action="'. route('product.destroy', $item->id) .'" method="POST">
+                          <form action="'. route('transaction.destroy', $item->id) .'" method="POST">
                             '. method_field('delete') . csrf_field()  .'
                             <button type="submit" class="dropdown-item text-danger"> Hapus </button>
                           </form>
@@ -54,7 +47,7 @@ class ProductController extends Controller
     
         }
 
-        return view('pages.admin.product.index');
+        return view('pages.admin.transaction.index');
     }
 
     /**
@@ -64,13 +57,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $users = User::all();
-        $categories = Category::all();
-
-        return view('pages.admin.product.create', [
-          'users' => $users,
-          'categories' => $categories
-        ]);
+    
     }
 
     /**
@@ -79,12 +66,9 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
-        Product::create($data);
-        return redirect()->route('product.index');
+        //
     }
 
     /**
@@ -106,13 +90,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-      $item = Product::findOrFail($id);
-      $users = User::all();
-      $categories = Category::all();
-      return view('pages.admin.product.edit', [
-        'item' => $item,
-        'users' => $users,
-        'categories' => $categories
+      $item = Transaction::findOrFail($id);
+      return view('pages.admin.transaction.edit', [
+        'item' => $item
       ]);
     }
 
@@ -123,14 +103,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
       $data = $request->all();
-      $item = Product::findOrFail($id);
-      $data['slug'] = Str::slug($request->name);
-      
+      $item = Transaction::findOrFail($id);
       $item->update($data);
-      return redirect()->route('product.index');
+
+      return redirect()->route('transaction.index');
     }
 
     /**
@@ -141,9 +120,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-       $item = Product::findOrFail($id);
+       $item = Transaction::findOrFail($id);
        $item->delete();
 
-       return redirect()->route('product.index');
+       return redirect()->route('transaction.index');
     }
 }

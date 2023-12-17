@@ -92,7 +92,7 @@ Route::middleware(['auth'])->group(function() {
 // admin section
 // no need namespace for laravel 8.0 >
 Route::prefix('admin')
-->name('admin.')
+->namespace('App\Http\Controllers\Admin')
 ->middleware(['auth','admin'])
 ->group(function(){
     Route::get('/', [AdminController\DashboardController::class,"index"])->name('admin-dashboard');
@@ -100,7 +100,7 @@ Route::prefix('admin')
     Route::resource('user', AdminController\UserController::class);
     Route::resource('product', AdminController\ProductController::class);
     Route::resource('product-gallery', AdminController\ProductGalleryController::class);
-    // Route::resource('transaction', AdminController\TransactionController::class);
+    Route::resource('transaction', AdminController\TransactionController::class);
 });
 
 Auth::routes();

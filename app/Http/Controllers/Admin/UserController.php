@@ -117,13 +117,13 @@ class UserController extends Controller
       $data = $request->all();
       $item = User::findOrFail($id);
         // if password is not changed
-     if($request->password) {
-        $data['password'] = bcrypt($request->password);
-     } else {
-        unset($data['password']);
-     }
+      if($request->password) {
+          $data['password'] = bcrypt($request->password);
+      } else {
+          unset($data['password']);
+      }
 
-     $item->update($data);
+      $item->update($data);
       return redirect()->route('user.index');
     }
 
